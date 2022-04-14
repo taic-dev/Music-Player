@@ -1,3 +1,5 @@
+body{font-family: 'Varela Round', sans-serif;}
+
 .mp-wrapper{
     max-width: 400px;
     height: 100vh;
@@ -30,7 +32,6 @@
 .mp-title h1{
     font-size: 25px;
     font-weight: bold;
-    font-family: 'Varela Round', sans-serif;
     margin-bottom: 10px;
 }
 
