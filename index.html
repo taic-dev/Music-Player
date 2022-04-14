@@ -7,28 +7,39 @@
     <!-- CSS -->
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Music Player</title>
 </head>
 <body>
     <div class="mp-wrapper">
-        <div class="jkt-img">
-            <img src="img/jazz.jpg" alt="jacket-image">
+        <div class="mp-inner">
+            <div class="mp-img">
+                <img src="img/jazz.jpg" alt="jacket-image" width="250px" height="250px">
+            </div>
+            <div class="mp-title">
+                <h1>Night trip</h1>
+                <span>Make a field Music</span>
+            </div>
+            <div class="mp-position">
+                <input type="range" name="" id="">
+                <div class="mp-time">
+                    <time>0:00</time>
+                    <time>6:23</time>
+                </div>
+            </div>
+            <ul class="mp-action">
+                <li><i class="fa-solid fa-arrows-rotate"></i></li>
+                <li><i class="fa-solid fa-forward-step fa-2x fa-rotate-180"></i></li>
+                <li><i class="fa-solid fa-play fa-2x"></i></li>
+                <li><i class="fa-solid fa-forward-step fa-2x"></i></li>
+                <li><i class="fa-solid fa-shuffle"></i></li>
+            </ul>
         </div>
-        <div class="mp-title">
-            <h1>Jazz</h1>
-        </div>
-        <div class="mp-position">
-            <time></time><input type="range" name="" id=""><time></time>
-        </div>
-        <ul class="mp-action">
-            <li><i class="fa-solid fa-arrows-rotate"></i></li>
-            <li><i class="fa-solid fa-forward-step"></i></li>
-            <li><i class="fa-solid fa-play"></i></li>
-            <li><i class="fa-solid fa-forward-step"></i></li>
-            <li><i class="fa-solid fa-shuffle"></i></li>
-        </ul>
     </div>
 </body>
 </html>
