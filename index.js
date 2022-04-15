@@ -2,6 +2,7 @@ const mpAction = document.querySelectorAll("li");
 const time = document.querySelectorAll("time");
 const range = document.querySelector("input[type='range']");
 let playFlag = 0;
+let chgMpTime = 0;
 // 音楽ファイルの読み込み
 const music = new Audio("musics/Night_trip.mp3");
 
@@ -37,7 +38,13 @@ music.addEventListener("timeupdate",() => {
     let min = Math.floor(mpTime / 60);
     let sec = Math.floor(mpTime - min * 60);
 
-    range.value=mpTime;
+    if(!chgMpTime){
+        range.value=mpTime;
+    }else{
+        console.log("check");
+        range.value=chgMpTime;
+        music.currentTime = chgMpTime
+    }
 
     if(Math.floor(mpTime) >= 60){
         if(sec<10){
@@ -61,6 +68,19 @@ music.addEventListener("ended",() => {
     chgIcon();
     time[0].textContent = "0:00";
     range.value=0;
+});
+
+// つまみを動かしたら
+range.addEventListener("input",() => {
+    music.pause();
+    playFlag = 0;
+    chgMpTime = range.value;
+    console.log(chgMpTime);
+    
+});
+
+range.addEventListener("change",() => {
+    console.log(chgMpTime);
 });
 
 // アイコンの切り替え
