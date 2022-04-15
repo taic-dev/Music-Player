@@ -4,7 +4,7 @@ const range = document.querySelector("input[type='range']");
 let playFlag = 0;
 let chgMpTime = 0;
 // 音楽ファイルの読み込み
-const music = new Audio("musics/Night_trip.mp3");
+const music = new Audio("musics/Pod_of_Rain.mp3");
 
 // 音楽の長さを取得
 music.addEventListener("loadedmetadata",() => {
@@ -24,11 +24,9 @@ mpAction[2].addEventListener("click",() => {
     if(playFlag == 0) {
         music.play();
         playFlag = 1;
-
     }else{
         music.pause();
         playFlag = 0;
-
     }
 });
 
@@ -38,13 +36,7 @@ music.addEventListener("timeupdate",() => {
     let min = Math.floor(mpTime / 60);
     let sec = Math.floor(mpTime - min * 60);
 
-    if(!chgMpTime){
-        range.value=mpTime;
-    }else{
-        console.log("check");
-        range.value=chgMpTime;
-        music.currentTime = chgMpTime
-    }
+    range.value=mpTime;
 
     if(Math.floor(mpTime) >= 60){
         if(sec<10){
@@ -65,9 +57,13 @@ music.addEventListener("timeupdate",() => {
 // 最後まで再生したら
 music.addEventListener("ended",() => {
     playFlag = 0;
-    chgIcon();
     time[0].textContent = "0:00";
     range.value=0;
+});
+
+// 再生が止まったら
+music.addEventListener('pause', function() {
+    chgIcon();
 });
 
 // つまみを動かしたら
@@ -75,12 +71,10 @@ range.addEventListener("input",() => {
     music.pause();
     playFlag = 0;
     chgMpTime = range.value;
-    console.log(chgMpTime);
-    
 });
 
 range.addEventListener("change",() => {
-    console.log(chgMpTime);
+    music.currentTime = chgMpTime
 });
 
 // アイコンの切り替え
