@@ -1,4 +1,4 @@
-// 
+// MPのデザイン変更
 const mpBtn = document.getElementById("mp-btn");
 const mpBtnLabel = document.querySelector("label");
 mpBtnLabel.addEventListener("click",()=>{
@@ -9,6 +9,7 @@ mpBtnLabel.addEventListener("click",()=>{
     }
 });
 
+// 音楽の情報
 const music = {
         title : [
             "Night trip",
@@ -65,32 +66,19 @@ const getMusicLength = () => {
     
         range.max=duration;
     
-        if(sec<10)sec = "0"+sec;
-        time[1].textContent = min+":"+sec;
+        if(sec<10){
+            sec = "0"+sec;
+            time[1].textContent = min+":"+sec;
+        }else{
+            time[1].textContent = min+":"+sec;
+        }
     });
 }
 getMusicLength();
 
-// 音楽再生/停止
-mpAction[2].addEventListener("click",() => {
-    if(playFlag == 0) {
-        getMusic.play();
-        playFlag = 1;
-    }else{
-        getMusic.pause();
-        playFlag = 0;
-    }
-});
-
-// 前の音楽を再生
-mpAction[1].addEventListener("click",() => {
-    if(musicFlag == 0){
-        musicFlag = musicList - 1;
-    }else{
-        musicFlag--;
-    }
+// 音楽の諸々の情報を取得
+const getMusicInfo = () => {
     getMusic.pause();
-    console.log(musicFlag);
     getMusic = new Audio("musics/" + music.title[musicFlag] + ".mp3");
     getImg();
     getTitle();
@@ -101,28 +89,7 @@ mpAction[1].addEventListener("click",() => {
     getMusicPlay();
     getMusicPause();
     getMusic.play();
-})
-
-// 次の音楽を再生
-mpAction[3].addEventListener("click",() => {
-    if(musicFlag + 1 == musicList){
-        musicFlag = 0;
-    }else{
-        musicFlag++;
-    }
-        getMusic.pause();
-        console.log(musicFlag);
-        getMusic = new Audio("musics/" + music.title[musicFlag] + ".mp3");
-        getImg();
-        getTitle();
-        getAuthor();
-        getMusicLength();
-        getMusicPosition();
-        getMusicEnded();
-        getMusicPlay();
-        getMusicPause();
-        getMusic.play();
-});
+}
 
 // 再生位置を取得
 const getMusicPosition = () => {
@@ -149,7 +116,6 @@ const getMusicPosition = () => {
         }
     });
 }
-
 getMusicPosition();
 
 // 最後まで再生したら
@@ -178,6 +144,44 @@ const getMusicPause = () => {
 }
 getMusicPause();
 
+// アイコンの切り替え
+const chgIcon = () => {
+    mpAction[2].firstChild.classList.toggle("fa-play");
+    mpAction[2].firstChild.classList.toggle("fa-pause");
+}
+
+// 音楽再生/停止
+mpAction[2].addEventListener("click",() => {
+    if(playFlag == 0) {
+        getMusic.play();
+        playFlag = 1;
+    }else{
+        getMusic.pause();
+        playFlag = 0;
+    }
+});
+
+// 前の音楽を再生
+mpAction[1].addEventListener("click",() => {
+    if(musicFlag == 0){
+        musicFlag = musicList - 1;
+    }else{
+        musicFlag--;
+    }
+    getMusicInfo();
+})
+
+// 次の音楽を再生
+mpAction[3].addEventListener("click",() => {
+    if(musicFlag + 1 == musicList){
+        musicFlag = 0;
+    }else{
+        musicFlag++;
+    }
+    getMusicInfo();
+});
+
+
 // つまみを動かしたら
 range.addEventListener("input",() => {
     getMusic.pause();
@@ -185,13 +189,7 @@ range.addEventListener("input",() => {
     chgMpTime = range.value;
 });
 
-// つまみをはましたら
+// つまみを離したら
 range.addEventListener("change",() => {
     getMusic.currentTime = chgMpTime
 });
-
-// アイコンの切り替え
-const chgIcon = () => {
-    mpAction[2].firstChild.classList.toggle("fa-play");
-    mpAction[2].firstChild.classList.toggle("fa-pause");
-}
