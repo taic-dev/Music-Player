@@ -1,3 +1,14 @@
+// 
+const mpBtn = document.getElementById("mp-btn");
+const mpBtnLabel = document.querySelector("label");
+mpBtnLabel.addEventListener("click",()=>{
+    if(!mpBtn.checked){
+        document.body.classList.toggle("dark-theme");
+    }else{
+        document.body.classList.toggle("dark-theme");
+    }
+});
+
 const music = {
         title : [
             "Night trip",
@@ -35,12 +46,15 @@ let getMusic = new Audio("musics/" + music.title[musicFlag] + ".mp3");
 
 // ジャケットの取得
 const getImg = () => img.setAttribute("src" , "img/" + music.img[musicFlag]);
+getImg();
 
 // タイトルの取得
 const getTitle = () => title.textContent = music.title[musicFlag];
+getTitle();
 
 // 作者の取得
 const getAuthor = () => author.textContent = music.author[musicFlag];
+getAuthor();
 
 // 音楽の長さを取得
 const getMusicLength = () => {

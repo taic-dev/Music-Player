@@ -1,4 +1,17 @@
-body{font-family: 'Varela Round', sans-serif;}
+:root{
+    --primary-color: #fff;
+    --secondary-color: #333;
+}
+
+.dark-theme{
+    --primary-color: #333;
+    --secondary-color: #fff;
+}
+
+body{
+    background: var(--primary-color);
+    font-family: 'Varela Round', sans-serif;
+}
 
 .mp-wrapper{
     max-width: 400px;
@@ -11,9 +24,42 @@ body{font-family: 'Varela Round', sans-serif;}
     align-items: center;
 }
 
-.mp-inner{
-
+.mp-btn{
+    text-align: right;
+    margin: 10px 0;
 }
+
+.mp-btn-label{
+    position: relative;
+    display: block;
+    margin: 0 0 0 auto;
+    width: 45px;
+    height: 25px;
+    border: solid 1px var(--secondary-color);
+    border-radius: 20px;
+    background: var(--secondary-color);
+}
+
+.mp-btn-label::before{
+    position: absolute;
+    left: 0;
+
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    content: "";
+    transform: translateX(0);
+    transition: transform 200ms;
+}
+
+.checkbox:checked + .mp-btn-label{background: var(--secondary-color);}
+.checkbox:checked + .mp-btn-label::before{
+    background: var(--primary-color);
+    transform: translateX(20px);
+}
+
+.mp-btn input{display: none;}
 
 .mp-img{
     text-align: center;
@@ -22,6 +68,7 @@ body{font-family: 'Varela Round', sans-serif;}
 .mp-img img{
     border-radius: 10px;
     object-fit: cover;
+    border: solid 1px #333;
 }
 
 .mp-title{
@@ -33,6 +80,11 @@ body{font-family: 'Varela Round', sans-serif;}
     font-size: 25px;
     font-weight: bold;
     margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+
+.mp-title span {
+    color: var(--secondary-color);
 }
 
 .mp-position{
@@ -43,7 +95,7 @@ body{font-family: 'Varela Round', sans-serif;}
     display: block;
     width: 100%;
     height: 5px;
-    background: #333;
+    background: var(--secondary-color);
     border-radius: 5px;
 }
 
@@ -57,6 +109,7 @@ body{font-family: 'Varela Round', sans-serif;}
     display: block;
     font-size: 12px;
     margin-top: 10px;
+    color: var(--secondary-color);
 }
 
 .mp-action{
@@ -68,4 +121,5 @@ body{font-family: 'Varela Round', sans-serif;}
 
 .mp-action li{
     cursor: pointer;
+    color: var(--secondary-color);
 }
