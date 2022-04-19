@@ -22,12 +22,25 @@ const music = {
 const mpAction = document.querySelectorAll("li");
 const time = document.querySelectorAll("time");
 const range = document.querySelector("input[type='range']");
+const img = document.querySelector("img");
+const title = document.querySelector("h1");
+const author = document.querySelector("span");
+const musicList = Object.keys(music.title).length;
 let musicFlag = 0;
 let playFlag = 0;
 let chgMpTime = 0;
 
 // 音楽ファイルの読み込み
 let getMusic = new Audio("musics/" + music.title[musicFlag] + ".mp3");
+
+// ジャケットの取得
+const getImg = () => img.setAttribute("src" , "img/" + music.img[musicFlag]);
+
+// タイトルの取得
+const getTitle = () => title.textContent = music.title[musicFlag];
+
+// 作者の取得
+const getAuthor = () => author.textContent = music.author[musicFlag];
 
 // 音楽の長さを取得
 const getMusicLength = () => {
@@ -57,10 +70,17 @@ mpAction[2].addEventListener("click",() => {
 
 // 前の音楽を再生
 mpAction[1].addEventListener("click",() => {
-    musicFlag--;
+    if(musicFlag == 0){
+        musicFlag = musicList - 1;
+    }else{
+        musicFlag--;
+    }
     getMusic.pause();
     console.log(musicFlag);
     getMusic = new Audio("musics/" + music.title[musicFlag] + ".mp3");
+    getImg();
+    getTitle();
+    getAuthor();
     getMusicLength();
     getMusicPosition();
     getMusicEnded();
@@ -71,17 +91,24 @@ mpAction[1].addEventListener("click",() => {
 
 // 次の音楽を再生
 mpAction[3].addEventListener("click",() => {
-    musicFlag++;
-    getMusic.pause();
-    console.log(musicFlag);
-    getMusic = new Audio("musics/" + music.title[musicFlag] + ".mp3");
-    getMusicLength();
-    getMusicPosition();
-    getMusicEnded();
-    getMusicPlay();
-    getMusicPause();
-    getMusic.play();
-})
+    if(musicFlag + 1 == musicList){
+        musicFlag = 0;
+    }else{
+        musicFlag++;
+    }
+        getMusic.pause();
+        console.log(musicFlag);
+        getMusic = new Audio("musics/" + music.title[musicFlag] + ".mp3");
+        getImg();
+        getTitle();
+        getAuthor();
+        getMusicLength();
+        getMusicPosition();
+        getMusicEnded();
+        getMusicPlay();
+        getMusicPause();
+        getMusic.play();
+});
 
 // 再生位置を取得
 const getMusicPosition = () => {
