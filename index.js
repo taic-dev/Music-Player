@@ -1,14 +1,3 @@
-// MPのデザイン変更
-const mpBtn = document.getElementById("mp-btn");
-const mpBtnLabel = document.querySelector("label");
-mpBtnLabel.addEventListener("click",()=>{
-    if(!mpBtn.checked){
-        document.body.classList.toggle("dark-theme");
-    }else{
-        document.body.classList.toggle("dark-theme");
-    }
-});
-
 // 音楽の情報
 const music = {
         title : [
@@ -32,6 +21,10 @@ const music = {
 }
 
 const mpAction = document.querySelectorAll("li");
+const muteBtn = document.getElementById("mute-btn");
+const muteBtnLabel = document.querySelector("#mute-btn-label");
+const mpBtn = document.getElementById("mp-btn");
+const mpBtnLabel = document.querySelector("#mp-btn-label");
 const time = document.querySelectorAll("time");
 const range = document.querySelector("input[type='range']");
 const img = document.querySelector("img");
@@ -44,6 +37,33 @@ let chgMpTime = 0;
 
 // 音楽ファイルの読み込み
 let getMusic = new Audio("musics/" + music.title[musicFlag] + ".mp3");
+
+// ミュート
+muteBtnLabel.addEventListener("click",()=>{
+    getMute();
+    muteBtnLabel.classList.toggle("fa-volume-low");
+    muteBtnLabel.classList.toggle("fa-volume-xmark");
+});
+
+const getMute = () =>{
+    console.log(muteBtn.checked)
+    if(!muteBtn.checked){
+        muteBtn.checked = true;
+        getMusic.muted = true;
+    }else{
+        muteBtn.checked = false
+        getMusic.muted = false;
+    }
+}
+
+// MPのデザイン変更
+mpBtnLabel.addEventListener("click",()=>{
+    if(!mpBtn.checked){
+        document.body.classList.toggle("dark-theme");
+    }else{
+        document.body.classList.toggle("dark-theme");
+    }
+});
 
 // ジャケットの取得
 const getImg = () => img.setAttribute("src" , "img/" + music.img[musicFlag]);
@@ -89,6 +109,14 @@ const getMusicInfo = () => {
     getMusicPlay();
     getMusicPause();
     getMusic.play();
+
+    // もしミュートだったら
+    if(muteBtn.checked){
+        muteBtn.checked = false;
+        getMusic.muted = false;
+        muteBtnLabel.classList.toggle("fa-volume-low");
+        muteBtnLabel.classList.toggle("fa-volume-xmark");
+    }
 }
 
 // 再生位置を取得

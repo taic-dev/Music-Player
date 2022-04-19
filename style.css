@@ -24,6 +24,19 @@ body{
     align-items: center;
 }
 
+.mp-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 10px;
+}
+
+#mute-btn-label{
+    font-size: 1.5em;
+    color: var(--secondary-color);
+}
+.mp-mute input{display: none;}
+
 .mp-btn{
     text-align: right;
     margin: 10px 0;
